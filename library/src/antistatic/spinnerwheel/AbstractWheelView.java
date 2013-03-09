@@ -132,6 +132,7 @@ public abstract class AbstractWheelView extends AbstractWheel {
 
     public AbstractWheelView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+
     }
 
     //--------------------------------------------------------------------------
@@ -150,7 +151,7 @@ public abstract class AbstractWheelView extends AbstractWheel {
         mSelectionDividerDimmedAlpha = a.getInt(R.styleable.AbstractWheelView_selectionDividerDimmedAlpha, DEF_SELECTION_DIVIDER_DIMMED_ALPHA);
         mItemOffsetPercent = a.getInt(R.styleable.AbstractWheelView_itemOffsetPercent, DEF_ITEM_OFFSET_PERCENT);
         mItemsPadding = a.getDimensionPixelSize(R.styleable.AbstractWheelView_itemsPadding, DEF_ITEM_PADDING);
-        mSelectionDivider = a.getDrawable(R.styleable.AbstractWheelView_selectionDivider);
+        mSelectionDivider = a.getDrawable(R.styleable.AbstractWheelView_selectionDividerWheel);
         a.recycle();
     }
 
@@ -224,14 +225,16 @@ public abstract class AbstractWheelView extends AbstractWheel {
     @Override
     protected void onScrollTouchedUp() {
         super.onScrollTouchedUp();
-        fadeSelectorWheel(750);
-        lightSeparators(750);
+        fadeSelectorWheel(500);
+        lightSeparators(500);
     }
 
     @Override
     protected void onScrollFinished() {
         fadeSelectorWheel(500);
         lightSeparators(500);
+        
+        notifyChangingListeners(0, mCurrentItemIdx);
     }
 
     //----------------------------------
